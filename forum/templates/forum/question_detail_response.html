@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div class="grid">
+    <aside>
+      <div class="sidebar-container">
+	<div class="forum-container" >
+	  <div class="personal-info">
+	    <img class="round-circle dashboard-round-image" src="{{ user.profile.image.url }}" >
+	    <h3 class="user-info" >{{user.username}}</h3>
+	  </div>
+
+	  <a class="forum-btn" href="{% url 'forum:question-create' %}">Ask Something</a>
+	</div>
+
+	<div class="logo-dash-container">
+	  <div class="logo-container">
+	    <img class="principal-logo" src="{% static 'images/principal-logo.webp' %}">
+	  </div>
+	  <div class="logo-text">
+	    <h1><span class="geo-text" >Geo</span>Tower<span class="api-text" >API</span></h1>
+	  </div>
+	</div>
+      </div>
+
+
+
+    </aside>
+
+    <main>
+      <div class="main-container">
+	{% include 'snippets/flashes.html' %}
+	<div class="topside">
+	  <div class="personal-info">
+	    <img class="round-circle dashboard-round-image" src="{{ user.profile.image.url }}" >
+	    <h3 class="user-info" >{{user.username}}</h3>
+	  </div>
+	  <a class="forum-btn" href="{% url 'forum:question-create' %}">Ask Something</a>
+	</div>
+
+	<div class="dashboard-container">
+
+	  <div class="question-container">
+	    <h3 class="principal-title question-text" ><a href="{% url 'forum:question-detail-response' question.id %}" >{{ question.question }}</a></h3>
+
+	    <div class="buttons-container">
+	      {% if question.author == user %}
+		<a class="forum-btn update-btn" href="{% url 'forum:question-update' question.id %}">Update</a>
+		<a class="forum-btn delete-btn" href="{% url 'forum:question-delete' question.id %}">Delete</a>
+	      {% endif %}
+	    </div>
+
+	    <p class="description-text only-one">{{ question.description }}</p>
+	    <div class="question-info">
+	      <p><a  class="link user-link" href="{% url 'forum:user-question' question.author.username %}" >{{ question.author.username }}</a></p>
+	      <p class="normal-text date-text" >Date: {{ question.date_posted|date:"F d, Y" }}</p>
+
+	    </div>
+	  </div>
+
+	  <form class="form question-form response-form" method="POST">
+	    {% csrf_token %}
+	    {{ form }}
+	    <button class="global-btn" type="submit" >Reply</button>
+	  </form>
+
+
+	  {% for response in responses %}
+	    <div class="question-container">
+	      <div class="buttons-container one-button">
+		{% if response.author == user %}
+		  <a class="forum-btn delete-btn" href="{% url 'forum:delete-response' response.id %}">Delete</a>
+		{% endif %}
+	      </div>
+	      <p class="response-text">{{ response.response }}</p>
+	      <div class="question-info">
+		<p><a  class="link user-link" href="{% url 'forum:user-question' response.author.username %}" >{{ response.author.username }}</a></p>
+		<p class="normal-text date-text" >Date: {{ response.date_posted|date:"F d, Y" }}</p>
+
+	      </div>
+	    </div>
+	  {% endfor %}
+	  
+	</div>
+
+
+
+      </div>
+    </main>
+  </div>
+
+
+
+{% endblock %}
+

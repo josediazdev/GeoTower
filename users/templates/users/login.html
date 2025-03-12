@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'snippets/flashes.html' %}
+  <div class="container">
+    <div class="logo-small-container">
+      <div class="logo-container">
+	<img class="principal-logo-small" src="{% static 'images/principal-logo.webp' %}">
+      </div>
+      <div class="logo-text-small">
+	<h1><span class="geo-text" >Geo</span>Tower<span class="api-text" >API</span></h1>
+      </div>
+    </div>
+
+    <form class="form login-form" method="POST">
+      {% csrf_token %}
+      {{ form }}
+      <button class="global-btn" type="submit">Sign In</button>
+    </form>
+
+    <div class="more-info">
+      <small>
+	New at GeoTower? <a class="link" href="{% url 'users-register' %}">Sign Up</a>
+      </small>
+      <small>
+       <a class="link" href="#">I forgot my password</a>
+      </small>
+    </div>
+  </div>
+{% endblock %}

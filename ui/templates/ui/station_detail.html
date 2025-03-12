@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div class="grid">
+    <aside>
+      <div class="sidebar-container">
+	<div class="personal-info">
+	  <img class="round-circle dashboard-round-image" src="{{ user.profile.image.url }}" >
+	  <h3 class="user-info" >{{user.username}}</h3>
+	</div>
+
+
+
+	  <div class="logo-dash-container">
+	    <div class="logo-container">
+	      <img class="principal-logo" src="{% static 'images/principal-logo.webp' %}">
+	    </div>
+	    <div class="logo-text">
+	      <h1><span class="geo-text" >Geo</span>Tower<span class="api-text" >API</span></h1>
+	    </div>
+	  </div>
+
+      </div>
+
+
+
+    </aside>
+
+    <main>
+      <div class="main-container">
+	{% include 'snippets/flashes.html' %}
+	<div class="topside">
+	  <div class="personal-info">
+	    <img class="round-circle dashboard-round-image" src="{{ user.profile.image.url }}" >
+	    <h3 class="user-info" >{{user.username}}</h3>
+	  </div>
+
+
+	</div>
+
+	<div class="dashboard-container">
+
+		<div class="station-name-container stations-dash">
+		      <div class="station-name-content stations-dash">
+			<p><a class="no-link" href="{% url 'ui:station-detail' one_station.id %}">{{ one_station.station_name }}</a></p>
+			<p class="station-text station-date">R: {{ one_station.register_date|date:"m/y" }}</p>
+			<p><a class="no-link delete-link" href="{% url 'ui:station-delete' one_station.id %}">Delete</a></p>
+		      </div>
+		      {% for ws in ws_os %}
+			<div class="station-detail-container">
+			  <div class="station-detail">
+			    <p class="coordenates station-text">Coords: lat {{ ws.latitude }} / lon {{ ws.longitude }}</p>
+			    <p class="station-text">{{ ws.time|date:"h:i:s d/m/y " }}</p>
+			  </div>
+
+			  <div class="sensors station-text">
+			    <p class="temp">Temp: {{ ws.temperature }}</p>
+			    <p class="humidity">Humidity: {{ ws.humidity }}</p>
+			    <p class="press">Pressure: {{ ws.pressure }}</p>
+			    <p class="altitude">Altitude: #</p>
+			  </div>
+			</div>
+		      {% endfor %}
+		</div>
+	</div>
+      </div>
+    </main>
+  </div>
+
+
+{% endblock %}
+

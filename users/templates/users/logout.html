@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'snippets/flashes.html' %}
+<div class="container">
+  <h2 class="principal-title" >The session has been closed</h2>
+  <div class="content-container more-info">
+    <small>
+      Do you wanto to log in again? <a class="link" href="{% url 'users-login' %}">Sign In</a>
+    </small>
+  </div>
+</div>
+{% endblock %}

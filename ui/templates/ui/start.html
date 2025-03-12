@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+{% include 'snippets/flashes.html' %}
+  <div class="container principal-hero">
+    <div class="logo-container">
+      <img class="principal-logo" src="{% static 'images/principal-logo.webp' %}">
+    </div>
+    <div class="logo-text">
+      <h1><span class="geo-text" >Geo</span>Tower<span class="api-text" >API</span></h1>
+    </div>
+  </div>
+
+
+  <div class="container hero-one">
+    <div class="principal-title">
+      <h2>What is GeoTowerAPI?</h1>
+    </div>
+    <div class="normal-text">
+      <p>GeoTowerAPI empowers users to build and monitor their own IoT weather stations.  It enables connection of devices, including those using microcontrollers like the Raspberry Pi Pico W, to the internet.
+      <br>
+      <br>
+The platform then provides a user-friendly interface to visualize the collected weather data and extract useful information.</p>
+    </div>
+  </div>
+
+  <div class="container hero-one-image-one">
+    <img class="hero-one-small" src="{% static 'images/hero-one-small.webp' %}">
+  </div>
+  <div class="container hero-one-image-two">
+    <img class="hero-one-large" src="{% static 'images/hero-one-large.webp' %}">
+  </div>
+
+  <div class="container hero-two">
+    <div class="principal-title">
+      <h2>How to start?</h1>
+    </div>
+    <div class="normal-text">
+      <p>Setting up your first weather station is easy with our platform.  Just sign up and follow the step-by-step guide.  No advanced technical knowledge is needed. Start your weather journey today!</p>
+    </div>
+    <a class="global-btn" href="{% url 'users-register' %}" >Sign Up</a>
+  </div>
+
+  <footer class="container-footer">
+    <p class="footer-text">&copy; Copyright GeoTowerAPI {{ current_year }}</p>
+    <p class="footer-text">Created by<a href="#" class="link author-page">Jorman Diaz</a></p>
+  </footer>
+{% endblock %}

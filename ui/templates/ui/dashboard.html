@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div class="grid">
+    <aside>
+      <div class="sidebar-container">
+	<div class="personal-info">
+	  <img class="round-circle dashboard-round-image" src="{{ user.profile.image.url }}" >
+	  <h3 class="user-info" >{{user.username}}</h3>
+	</div>
+
+	<form class="station-form" method="POST">
+	  {% csrf_token %}
+	  {{ form }}
+	  <button class="forum-btn" type="submit">Add Station</button>
+	</form>
+
+
+
+	  <div class="station-name-container scroll">
+	    {% for station in stations %}
+	      <div class="station-name-content">
+		<a class="station-link" href="{% url 'ui:station-detail' station.id %}">{{ station.station_name }}</a>
+		<p class="station-link" >ID: {{ station.station_key }}</p>
+	      </div>
+	    {% endfor %}
+	  </div>
+
+	  <div class="logo-dash-container">
+	    <div class="logo-container">
+	      <img class="principal-logo" src="{% static 'images/principal-logo.webp' %}">
+	    </div>
+	    <div class="logo-text">
+	      <h1><span class="geo-text" >Geo</span>Tower<span class="api-text" >API</span></h1>
+	    </div>
+	  </div>
+
+      </div>
+
+
+
+    </aside>
+
+    <main>
+      <div class="main-container">
+	{% include 'snippets/flashes.html' %}
+	<div class="topside">
+	  <div class="personal-info">
+	    <img class="round-circle dashboard-round-image" src="{{ user.profile.image.url }}" >
+	    <h3 class="user-info" >{{user.username}}</h3>
+	  </div>
+	  <form class="station-form" method="POST">
+	    {% csrf_token %}
+	    {{ form }}
+	    <button class="forum-btn" type="submit">Add Station</button>
+	  </form>
+
+	  <div class="station-name-container scroll">
+	    {% for station in stations %}
+	      <div class="station-name-content">
+		<a class="station-link" href="{% url 'ui:station-detail' station.id %}">{{ station.station_name }}</a>
+		<p class="station-link" >ID: {{ station.station_key }}</p>
+	      </div>
+	    {% endfor %}
+	  </div>
+
+	</div>
+
+	<div class="dashboard-container">
+
+	      {% for result in results %}
+		<div class="station-name-container stations-dash">
+		      <div class="station-name-content stations-dash">
+			<p><a class="station-link" href="{% url 'ui:station-detail' result.station_id %}">{{ result.station_name }}</a></p>
+			<p class="station-text">{{ result.time|date:"h:i:s d/m/y " }}</p>
+		      </div>
+		      <p class="coordenates station-text">Coordenates: lat {{ result.latitude }} / lon {{ result.longitude }}</p>
+		      <div class="sensors station-text">
+			<p class="temp">Temp: {{ result.temperature }}</p>
+			<p class="humidity">Humidity: {{ result.humidity }}</p>
+			<p class="press">Pressure: {{ result.pressure }}</p>
+			<p class="altitude">Altitude: #</p>
+		      </div>
+		</div>
+	      {% endfor %}
+	</div>
+      </div>
+    </main>
+  </div>
+
+
+{% endblock %}

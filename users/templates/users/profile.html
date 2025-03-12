@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'snippets/flashes.html' %}
+  <div class="container">
+    <img class="round-circle profile-round-image" src="{{ user.profile.image.url }}" >
+    <h1 class="user-info">{{ user.username }}</h1>
+    <p class="user-info">{{ user.email }}</p>
+
+    <form class="profile-form" method="POST" enctype="multipart/form-data" >
+      {% csrf_token %}
+      {{ u_form.username.label_tag }}
+      {{ u_form.username }}
+      {{ u_form.email.label_tag }}
+      {{ u_form.email }}
+      {{ p_form }}
+      <button class="global-btn" type="submit">Update Info</button>
+    </form>
+
+  </div>
+{% endblock %}
