@@ -83,6 +83,16 @@ def dashboard(request):
             instance = form.save(commit=False)
             # Guarda el formulario sin guardar en la base de datos todavía.
 
+            # Capitaliza el station_name
+            instance.station_name = form.cleaned_data['station_name'].capitalize()
+
+            # Verifying existence
+            station_exists = StationUnit.objects.filter(station_name=instance.station_name).exists()
+
+            if station_exists:
+                messages.error(request, f'Station name already exists')
+                return redirect('ui:dashboard')
+
             instance.station_key = get_randnum()
             # Genera y asigna una clave de estación aleatoria
 

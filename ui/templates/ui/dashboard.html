@@ -13,7 +13,25 @@
 
 	<form class="station-form" method="POST">
 	  {% csrf_token %}
-	  {{ form }}
+	  {% comment %}{{ form }}{% endcomment %}
+
+	  {% if form.non_field_errors %}
+	  <ul class="errorlist">
+	      {% for error in form.non_field_errors %}
+		  <li>{{ error }}</li>
+	      {% endfor %}
+	  </ul>
+	  {% endif %}
+
+	  <div class="form-group">
+	    {{ form.station_name.label_tag }}
+	    {{ form.station_name }}
+	    {% if form.station_name.errors %}
+	      <div class="error">
+		{{ form.station_name.errors }}
+	      </div>
+	    {% endif %}
+	  </div>
 	  <button class="forum-btn" type="submit">Add Station</button>
 	</form>
 
@@ -53,7 +71,24 @@
 	  </div>
 	  <form class="station-form" method="POST">
 	    {% csrf_token %}
-	    {{ form }}
+	    {% comment %}{{ form }}{% endcomment %}
+	    {% if form.non_field_errors %}
+	    <ul class="errorlist">
+		{% for error in form.non_field_errors %}
+		    <li>{{ error }}</li>
+		{% endfor %}
+	    </ul>
+	    {% endif %}
+
+	    <div class="form-group">
+	      {{ form.station_name.label_tag }}
+	      {{ form.station_name }}
+	      {% if form.station_name.errors %}
+		<div class="error">
+		  {{ form.station_name.errors }}
+		</div>
+	      {% endif %}
+	    </div>
 	    <button class="forum-btn" type="submit">Add Station</button>
 	  </form>
 

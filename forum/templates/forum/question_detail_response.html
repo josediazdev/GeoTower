@@ -62,7 +62,25 @@
 
 	  <form class="form question-form response-form" method="POST">
 	    {% csrf_token %}
-	    {{ form }}
+	    {% comment %}{{ form }}{% endcomment %}
+
+	    {% if form.non_field_errors %}
+	    <ul class="errorlist">
+		{% for error in form.non_field_errors %}
+		    <li>{{ error }}</li>
+		{% endfor %}
+	    </ul>
+	    {% endif %}
+
+	    <div class="form-group">
+	      {{ form.response.label_tag }}
+	      {{ form.response }}
+	      {% if form.response.errors %}
+		<div class="error">
+		  {{ form.response.errors }}
+		</div>
+	      {% endif %}
+	    </div>
 	    <button class="global-btn" type="submit" >Reply</button>
 	  </form>
 

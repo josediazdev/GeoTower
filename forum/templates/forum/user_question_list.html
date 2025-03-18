@@ -5,13 +5,24 @@
 
   <div class="grid">
     <aside>
-      <div class="sidebar-container">
-	<div class="personal-info">
-	  <img class="round-circle dashboard-round-image" src="{{ user.profile.image.url }}" >
-	  <h3 class="user-info" >{{user.username}}</h3>
+      <div class="sidebar-container forum">
+	<div class="forum-container" >
+	  <div class="personal-info">
+	    <img class="round-circle dashboard-round-image" src="{{ user.profile.image.url }}" >
+	    <h3 class="user-info" >{{user.username}}</h3>
+	  </div>
+
+	  <a class="forum-btn" href="{% url 'forum:question-create' %}">Ask Something</a>
 	</div>
 
-	<a class="forum-btn" href="{% url 'forum:question-create' %}">Ask Something</a>
+	<div class="logo-dash-container">
+	  <div class="logo-container">
+	    <img class="principal-logo" src="{% static 'images/principal-logo.webp' %}">
+	  </div>
+	  <div class="logo-text">
+	    <h1><span class="geo-text" >Geo</span>Tower<span class="api-text" >API</span></h1>
+	  </div>
+	</div>
       </div>
 
 
